@@ -1,7 +1,4 @@
-GET http://localhost:3000/movies
-###
-### Funktioniert nicht
-GET http://localhost:3000/movies?genre=Fantasy&rating=PG-13
+GET http://localhost:3000/kfz/getCars
 ###
 GET http://localhost:3000/actors
 ###
@@ -15,5 +12,3 @@ Content-Type: application/json
     "image": "A",
     "born": "1999-12-12"
 }
-###
-delete http://127.0.0.1:3000/actors/20
