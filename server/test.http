@@ -1,0 +1,19 @@
+GET http://localhost:3000/movies
+###
+### Funktioniert nicht
+GET http://localhost:3000/movies?genre=Fantasy&rating=PG-13
+###
+GET http://localhost:3000/actors
+###
+get http://localhost:3000/movies/2/actors
+###
+post http://127.0.0.1:3000/actors
+Content-Type: application/json
+
+{
+    "name": "James Garner2",
+    "image": "A",
+    "born": "1999-12-12"
+}
+###
+delete http://127.0.0.1:3000/actors/20
