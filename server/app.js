@@ -19,8 +19,8 @@ app.use(helmet());
 
 app.use(express.json());
 
-app.use('/kfz/', kfzRoutes);
-app.use('/kennzeichen/', kennzeichenRoutes);
+app.use('/kfz', kfzRoutes);
+app.use('/kennzeichen', kennzeichenRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

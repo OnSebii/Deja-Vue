@@ -5,6 +5,6 @@ const router = express.Router();
 
 // KFZ Routen
 
-router.get('/kfz', getCars);
+router.get('/', getCars);
 
 module.exports = router;

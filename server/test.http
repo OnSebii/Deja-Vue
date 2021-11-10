@@ -1,10 +1,16 @@
-GET http://localhost:3000/kfz/getCars
+GET http://localhost:3000/kfz
 ###
-GET http://localhost:3000/actors
+GET http://localhost:3000/kennzeichen/
 ###
-get http://localhost:3000/movies/2/actors
+post http://127.0.0.1:3000/kfz
+Content-Type: application/json
+
+{
+    "bezirk": "WU",
+    "nummer": "1234 AB"
+}
 ###
-post http://127.0.0.1:3000/actors
+post http://127.0.0.1:3000/kennzeichen
 Content-Type: application/json
 
 {

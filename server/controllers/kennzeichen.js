@@ -6,6 +6,11 @@ const getKennzeichen = asyncHandler(async (req, res) => {
   return res.status(200).json(await model.getKennzeichen());
 });
 
+const addKennzeichen = asyncHandler(async (req, res) => {
+  return res.status(200).json(await model.addKennzeichen());
+});
+
 module.exports = {
   getKennzeichen,
+  addKennzeichen,
 };
