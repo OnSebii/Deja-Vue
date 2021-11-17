@@ -1,18 +1,8 @@
-GET http://localhost:3000/kfz
-###
 GET http://localhost:3000/kennzeichen/?id=6
 ###
 GET http://localhost:3000/kennzeichen/
 ###
 delete http://localhost:3000/kennzeichen/20
-###
-post http://127.0.0.1:3000/kfz
-Content-Type: application/json
-
-{
-    "bezirk": "WU",
-    "nummer": "1234 AB"
-}
 ###
 post http://127.0.0.1:3000/kennzeichen
 Content-Type: application/json

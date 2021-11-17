@@ -21,6 +21,7 @@ const addKennzeichen = asyncHandler(async (req, res) => {
       kennzeichenId: id,
     });
   }
+  return res.status(500).json({ code: 500, data: 'Server Error' });
 });
 
 const deleteKennzeichen = asyncHandler(async (req, res) => {

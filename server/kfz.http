@@ -1,0 +1,14 @@
+GET http://localhost:3000/kfz
+###
+GET http://localhost:3000/kfz?id=9
+###
+delete http://localhost:3000/kfz/9
+###
+post http://127.0.0.1:3000/kfz
+Content-Type: application/json
+
+{
+    "marke": "BMW",
+    "modell": "116",
+    "gesehen": "2021-11-17"
+}

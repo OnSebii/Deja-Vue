@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const path = require('path');
 const kfzRoutes = require('./routes/kfz');
 const kennzeichenRoutes = require('./routes/kennzeichen');
+const kennzeichenKfz = require('./routes/kennzeichen_kfz');
 
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 
@@ -21,6 +22,7 @@ app.use(express.json());
 
 app.use('/kfz', kfzRoutes);
 app.use('/kennzeichen', kennzeichenRoutes);
+app.use('/knzkfz', kennzeichenKfz);
 
 app.use(notFound);
 app.use(errorHandler);
