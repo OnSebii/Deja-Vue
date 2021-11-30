@@ -1,32 +1,63 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div id="app" class="container d-flex flex-column justify-content-center align-items-center mt-5">
+    <img :src="`${serverAddress}/employees.jpg`" class="mx-auto d-block my-3" width="300" alt="picture of employees" />
+    <h1>Hey</h1>
+    <ButtonGet @get="fetchData"></ButtonGet>
+    <CardView :employees="employees" @del="delEmployee"></CardView>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import axios from 'axios';
 
-#nav {
-  padding: 30px;
-}
+import ButtonGet from '@/components/ButtonGet.vue';
+import CardView from '@/components/CardView.vue';
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+export default {
+  name: 'app',
+  components: {
+    ButtonGet,
+    CardView,
+  },
+  data() {
+    return {
+      serverAddress: process.env.VUE_APP_SERVER,
+      employees: [],
+    };
+  },
+  created() {
+    document.addEventListener('swUpdated', this.updateAvailable, { once: true });
+  },
+  methods: {
+    async fetchData() {
+      console.log('fetchData called');
+      try {
+        const { data } = await axios({
+          url: `${process.env.VUE_APP_SERVER}/employees`,
+          method: 'GET',
+        });
+        this.employees = data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async delEmployee(e) {
+      console.log('delEmployee called');
+      try {
+        await axios({
+          url: `${process.env.VUE_APP_SERVER}/employees/${e.id}`,
+          method: 'delete',
+        });
+        this.fetchData();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    updateAvailable() {
+      alert('Update vorhanden, bitte App neu starten!');
+    },
+  },
+};
+</script>
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style></style>
