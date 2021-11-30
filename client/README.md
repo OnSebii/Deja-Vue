@@ -1,4 +1,4 @@
-# employees-simple-pwa
+# client
 
 ## Project setup
 ```
