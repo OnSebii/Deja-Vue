@@ -1,28 +1,22 @@
 <template>
   <div>
-    <div v-show="employees.length > 0">
-      <div class="row justify-content-center mt-4">
-        <div
-          class="card p-2 m-2 bg-light"
-          style="width: 22rem"
-          v-for="e in employees"
-          :key="e.email"
-        >
-          <img
-            :src="`${serverAddress}/${e.picture.large}
-          `"
-            class="mx-auto d-block"
-            alt="picture of employee"
-          />
-          <div class="mx-auto d-block mt-2">
-            <h4>Name: {{ e.name.title }} {{ e.name.first }} {{ e.name.last }}</h4>
-            <p class="card-text">Email: {{ e.email }}</p>
-            <p class="card-text">Phone: {{ e.phone }}</p>
-          </div>
-          <button @click="$emit('del', e)" class="btn btn-outline-danger mx-auto d-block mt-3">
-            Delete
-          </button>
-        </div>
+    <div class="row justify-center">
+      <div class="mx-2" v-for="e in kfz" :key="e.id">
+        <v-card class="mx-auto my-12" max-width="374" elevation="5" outlined>
+          <v-card-title>{{ e.marke }} {{ e.modell }}</v-card-title>
+          <v-card-text>
+            <div class="my-4 text-subtitle-1">Kennzeichen • {{ e.bezirk }} {{ e.nummer }}</div>
+            <div class="my-4 text-subtitle-1">
+              Gesehen am • {{ e.gesehen | moment("D.MM.YYYY") }}
+            </div>
+          </v-card-text>
+
+          <v-divider class="mx-4"></v-divider>
+
+          <v-card-actions>
+            <v-btn color="red darken-4" text @click="$emit('del', e)"> Delete </v-btn>
+          </v-card-actions>
+        </v-card>
       </div>
     </div>
   </div>
@@ -31,19 +25,12 @@
 <script>
 export default {
   name: "CardView",
-  data: () => ({
-    serverAddress: process.env.VUE_APP_SERVER,
-  }),
+  data: () => ({}),
+
   props: {
-    employees: {
+    kfz: {
       type: Array,
     },
   },
 };
 </script>
-
-<style scoped>
-img {
-  width: 10rem;
-}
-</style>

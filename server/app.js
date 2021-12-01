@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const path = require('path');
+const cors = require('cors');
 const kfzRoutes = require('./routes/kfz');
 const kennzeichenRoutes = require('./routes/kennzeichen');
 const kennzeichenKfz = require('./routes/kennzeichen_kfz');
@@ -14,6 +15,7 @@ require('dotenv').config();
 const app = express();
 
 app.use(morgan('dev'));
+app.use(cors());
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(helmet());
