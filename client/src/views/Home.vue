@@ -1,5 +1,7 @@
 <template>
   <div>
+    <AddCar></AddCar>
+
     <CardView :kfz="kfz" @del="delCar"></CardView>
   </div>
 </template>
@@ -7,6 +9,7 @@
 <script>
 import axios from "axios";
 import CardView from "@/components/CardView.vue";
+import AddCar from "@/components/AddCar.vue";
 export default {
   name: "Home",
   data: () => ({
@@ -45,6 +48,7 @@ export default {
 
   components: {
     CardView,
+    AddCar,
   },
 };
 </script>

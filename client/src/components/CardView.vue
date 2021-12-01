@@ -25,7 +25,9 @@
 <script>
 export default {
   name: "CardView",
-  data: () => ({}),
+  data: () => ({
+    
+  }),
 
   props: {
     kfz: {
