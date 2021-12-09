@@ -3,8 +3,12 @@
     <v-row justify="center">
       <v-dialog v-model="dialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark v-bind="attrs" v-on="on"> Add Car </v-btn>
+          <!-- <v-btn color="primary" dark v-bind="attrs" v-on="on"> Add Car </v-btn> -->
+          <v-btn icon>
+            <v-icon v-bind="attrs" v-on="on">mdi-plus</v-icon>
+          </v-btn>
         </template>
+
         <v-card>
           <v-card-title>
             <span class="text-h5">Auto und Kennzeichen hinzufügen</span>
@@ -137,19 +141,48 @@ export default {
     async addCar() {
       if (this.validate() == true)
         try {
-          const { data } = await axios({
+          let kennzeichenId = null;
+          let kfzId = null;
+
+          const data = await axios({
             url: `${process.env.VUE_APP_SERVER}/kennzeichen`,
             method: "post",
             contentType: "application/json",
-            data: {},
+            data: {
+              bezirk: this.bezirk,
+              nummer: this.nummer,
+            },
           });
-          this.kfz = data.data;
+          kennzeichenId = data.data.kennzeichenId;
+
+          const data2 = await axios({
+            url: `${process.env.VUE_APP_SERVER}/kfz`,
+            method: "post",
+            contentType: "application/json",
+            data: {
+              marke: this.marke,
+              modell: this.modell,
+              gesehen: this.date,
+            },
+          });
+          kfzId = data2.data.carId;
+
+          const data3 = await axios({
+            url: `${process.env.VUE_APP_SERVER}/kfz`,
+            method: "post",
+            contentType: "application/json",
+            data: {
+              knzid: this.marke,
+              kfzid: this.modell,
+            },
+          });
+
+          console.log(kennzeichenId, kfzId);
 
           this.dialog = false;
         } catch (error) {
           console.error(error);
         }
-      this.dialog = false;
     },
   },
 

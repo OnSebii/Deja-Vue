@@ -5,9 +5,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
+      <AddCar></AddCar>
     </v-app-bar>
 
     <v-main>
@@ -25,7 +23,12 @@
 </template>
 
 <script>
+import AddCar from "@/components/AddCar.vue";
 export default {
   name: "App",
+
+  components: {
+    AddCar,
+  },
 };
 </script>
