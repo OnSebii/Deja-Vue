@@ -1,5 +1,5 @@
 const express = require('express');
-const { getKennzeichen, addKennzeichen, deleteKennzeichen } = require('../controllers/kennzeichen');
+const { getKennzeichen, addKennzeichen, deleteKennzeichen, updateKennzeichen } = require('../controllers/kennzeichen');
 
 const router = express.Router();
 
@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/', getKennzeichen);
 router.post('/', addKennzeichen);
+router.patch('/:id', updateKennzeichen);
 router.delete('/:id', deleteKennzeichen);
 
 module.exports = router;

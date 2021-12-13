@@ -19,8 +19,19 @@ const deleteKennzeichen = async (id) => {
   return rows;
 };
 
+const updateKennzeichen = async (body, id) => {
+  let upd = [];
+  for (key in body) upd.push(`${key} = '${body[key]}'`);
+  const cmd = 'update kennzeichen set ' + upd.join(', ') + ' where id = $1';
+  console.log(cmd);
+  await db.query(cmd, [id]);
+
+  return '';
+};
+
 module.exports = {
   getKennzeichen,
   addKennzeichen,
   deleteKennzeichen,
+  updateKennzeichen,
 };

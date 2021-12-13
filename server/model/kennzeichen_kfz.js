@@ -15,11 +15,17 @@ const getKennzeichenKfz = async (id) => {
 };
 
 const addKennzeichenKfz = async (body) => {
-  const { rows } = await db.query('insert into kennzeichen_kfz (kennzeichenId, kfzId) values($1, $2);', [body.knzid, body.kfzid]);
+  const { rows } = await db.query('insert into kennzeichen_kfz (kennzeichenId, kfzId) values ($1, $2) returning *;', [body.knzid, body.kfzid]);
+  return rows;
+};
+
+const deleteKennzeichenKfz = async (id) => {
+  const { rows } = await db.query('delete from kennzeichen_kfz where kennzeichenId = $1;', [id]);
   return rows;
 };
 
 module.exports = {
   addKennzeichenKfz,
   getKennzeichenKfz,
+  deleteKennzeichenKfz,
 };

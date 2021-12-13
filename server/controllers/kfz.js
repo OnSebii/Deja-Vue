@@ -38,8 +38,15 @@ const deleteCar = asyncHandler(async (req, res) => {
   return res.status(200).json({ code: 200, data: `|${car}| wurde gelöscht` });
 });
 
+const updateCar = asyncHandler(async (req, res) => {
+  await model.updateCar(req.body, req.params.id);
+
+  return res.status(200).json({ code: 200, data: 'Wurde aktualisiert' });
+});
+
 module.exports = {
   getCars,
   addCar,
   deleteCar,
+  updateCar,
 };

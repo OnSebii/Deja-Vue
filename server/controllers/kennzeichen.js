@@ -37,8 +37,15 @@ const deleteKennzeichen = asyncHandler(async (req, res) => {
   return res.status(200).json({ code: 200, data: `Kennzeichen |${kennzeichen}| wurde gelöscht` });
 });
 
+const updateKennzeichen = asyncHandler(async (req, res) => {
+  await model.updateKennzeichen(req.body, req.params.id);
+
+  return res.status(200).json({ code: 200, data: 'Wurde aktualisiert' });
+});
+
 module.exports = {
   getKennzeichen,
   addKennzeichen,
   deleteKennzeichen,
+  updateKennzeichen,
 };

@@ -19,8 +19,20 @@ const deleteCar = async (id) => {
   return rows;
 };
 
+const updateCar = async (body, id) => {
+  const { rows } = await db.query('select kfzid from kennzeichen_kfz where kennzeichenId = $1', [id]);
+
+  let upd = [];
+  for (key in body) upd.push(`${key} = '${body[key]}'`);
+  const cmd = 'UPDATE kfz SET ' + upd.join(', ') + ' where id = $1';
+  await db.query(cmd, [rows[0].kfzid]);
+
+  return '';
+};
+
 module.exports = {
   getCars,
   addCar,
   deleteCar,
+  updateCar,
 };

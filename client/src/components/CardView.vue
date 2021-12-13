@@ -15,6 +15,8 @@
 
           <v-card-actions>
             <v-btn color="red darken-4" text @click="$emit('del', e)"> Delete </v-btn>
+            <v-spacer></v-spacer>
+            <EditCar :car="e" @update="$emit('update')"></EditCar>
           </v-card-actions>
         </v-card>
       </div>
@@ -23,16 +25,18 @@
 </template>
 
 <script>
+import EditCar from "@/components/EditCar.vue";
 export default {
   name: "CardView",
-  data: () => ({
-    
-  }),
+  data: () => ({}),
 
   props: {
     kfz: {
       type: Array,
     },
+  },
+  components: {
+    EditCar,
   },
 };
 </script>

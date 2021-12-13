@@ -12,19 +12,27 @@ const addKennzeichenKfz = asyncHandler(async (req, res) => {
     return res.status(400).json({ code: 400, data: 'KennzeichenID und KfzID werden benötigt' });
   }
 
-  const [{ id }] = await model.addKennzeichenKfz(req.body);
+  const [{ kennzeichenid, kfzid }] = await model.addKennzeichenKfz(req.body);
 
-  if (id > 0) {
+  console.log(kennzeichenid, kfzid);
+
+  if (kennzeichenid > 0 && kfzid > 0) {
     return res.status(200).json({
       code: 200,
       data: 'Wurde erfolgreich hinzugefügt',
-      kennzeichenId: id,
     });
   }
   return res.status(500).json({ code: 500, data: 'Server Error' });
 });
 
+const deleteKennzeichenKfz = asyncHandler(async (req, res) => {
+  await model.deleteKennzeichenKfz(req.query.id);
+
+  return res.status(200).json({ code: 200, data: 'Wurde gelöscht' });
+});
+
 module.exports = {
   addKennzeichenKfz,
   getKennzeichenKfz,
+  deleteKennzeichenKfz,
 };

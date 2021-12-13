@@ -167,18 +167,21 @@ export default {
           });
           kfzId = data2.data.carId;
 
+          console.log(kennzeichenId, kfzId);
+
           const data3 = await axios({
-            url: `${process.env.VUE_APP_SERVER}/kfz`,
+            url: `${process.env.VUE_APP_SERVER}/knzkfz`,
             method: "post",
             contentType: "application/json",
             data: {
-              knzid: this.marke,
-              kfzid: this.modell,
+              knzid: kennzeichenId,
+              kfzid: kfzId,
             },
           });
 
-          console.log(kennzeichenId, kfzId);
-
+          console.log(data3.data.data);
+          // ToDO Alert einbauen wenns hinzugefügt wurde
+          this.$emit("update");
           this.dialog = false;
         } catch (error) {
           console.error(error);

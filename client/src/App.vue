@@ -5,11 +5,11 @@
 
       <v-spacer></v-spacer>
 
-      <AddCar></AddCar>
+      <AddCar @update="fetchData"></AddCar>
     </v-app-bar>
 
     <v-main>
-      <router-view />
+      <router-view :kfz="kfz" @update="fetchData" />
     </v-main>
 
     <v-footer absolute fixed padless>
@@ -23,10 +23,31 @@
 </template>
 
 <script>
+import axios from "axios";
 import AddCar from "@/components/AddCar.vue";
 export default {
   name: "App",
-
+  data: () => ({
+    serverAddress: process.env.VUE_APP_SERVER,
+    kfz: [],
+  }),
+  methods: {
+    async fetchData() {
+      try {
+        const { data } = await axios({
+          url: `${process.env.VUE_APP_SERVER}/knzkfz`,
+          method: "GET",
+        });
+        this.kfz = data.data;
+        console.log(this.kfz);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
+  created() {
+    this.fetchData();
+  },
   components: {
     AddCar,
   },
